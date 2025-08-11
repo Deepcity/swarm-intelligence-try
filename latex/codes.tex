@@ -1,0 +1,55 @@
+\documentclass{ctexart}
+\pagestyle{empty}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{amsmath}
+
+\begin{document}
+\begin{algorithm}[H]
+\caption{Evolutionary Algorithm for Path Optimization}
+\KwIn{Population size $population\_size$, Generations $generation\_times$, Fitness limit $fitness\_limit$, Task $task$, Probability parameters $p\_shift$, $p\_swop$, $p\_up$, $p\_down$}
+\KwOut{Optimal genome $best\_genome$}
+Initialize population with genomes of random points \;
+$best\_fitness\_seen \gets -\infty$\;
+\For{$i \gets 1$ \KwTo $generation\_times$}{
+    Sort $population$ by fitness in descending order\;
+    $fitness \gets$ fitness of best genome\;
+    
+    \If{$fitness > best\_fitness\_seen$}{
+        $best\_fitness\_seen \gets fitness$\;
+    }
+    \If{$fitness \geq fitness\_limit$}{
+        Break loop\;
+    }
+
+    Select top $n\_top$ genomes as $next\_generation$\;
+    
+    \For{$k \gets 1$ \KwTo $n\_perturb$}{
+        Randomly select $candidate$ from top genomes\;
+        
+        \If{$rand < p\_shift$}{
+            Apply \textit{shift\_to\_end} to $candidate$\;
+        }
+        \If{$rand < p\_swop$}{
+            Apply \textit{swop} to $candidate$\;
+        }
+        \If{$rand < p\_up$}{
+            Increment position in $candidate$ if within bounds\;
+        }
+        \If{$rand < p\_down$}{
+            Decrement position in $candidate$ if within bounds\;
+        }
+        Add $candidate$ to $next\_generation$\;
+    }
+    
+    \For{$j \gets 1$ \KwTo $(population\_size - n\_top - n\_perturb) / 2$}{
+        Select $parents$ using \textit{tournament selection}\;
+        Perform \textit{partial map crossover} with probability $0.9$\;
+        Apply \textit{swop} with probability $0.9$ to offspring\;
+        Add offspring to $next\_generation$\;
+    }
+
+    Update $population$ with $next\_generation$\;
+}
+Return $best\_genome$ from $population$\;
+\end{algorithm}
+\end{document}
