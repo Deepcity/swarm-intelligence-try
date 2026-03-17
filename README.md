@@ -8,9 +8,7 @@ The algorithm addresses the shortest path problem between the group of points by
 
 The problem comes from: _Alogrithm Summit Challenge - Sixth Global Artificial Intellgence Agorithm Competition for Excellence_.
 
-可惜的是，该份代码由于赛制仅获三等奖。
-
-Regrettably, This implementation was awarded only third parize under the competition's judging criteria.
+~~这份在空闲时为学校做的代码堪堪在比赛中获得三等奖。不知道比赛重点考察什么~~
 
 blog link: [blog](https://deepcity.github.io/blog/pgstudy-swarm-intelligence/)
 
